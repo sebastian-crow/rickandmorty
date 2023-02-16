@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-  <title>Login</title>
+  <title>Bienvenido!</title>
 
   </script>
 </head>
@@ -26,31 +26,120 @@
 
     <header class="container-xl box-header mb-3"></header>
 
-    <div class="container-xl box-form">
-      <form>
-        <div class="row d-flex justify-content-center align-items-center">
-          <div class="col-xl-6 d-flex justify-content-center align-items-center mb-4 mb-xl-0">
-            <video class="video" src="assets/img/rickmorty-f958db7a.mp4" autoplay loop muted></video>
-          </div>
-          <div class="col-xl-6 d-flex flex-column justify-content-center">
-            <div class="mb-4 mx-5">
-              <h2 class="text-center mb-3 fw-bold">Iniciar <span class="h2-color">Sesión</span></h2>
-              <label class="form-label text-center fw-" for="user">Usuario</label>
-              <input class="form-control" type="text" id="user">
-            </div>
-            <div class="mb-4 mx-5">
-              <label class="form-label" for="password">Password</label>
-              <input class="form-control" type="text" id="password">
-            </div>
-            <div class="mb-4 mx-auto text-center">
-              <button class="d-flex justify-content-center align-items-center btn btn-first text-center fs-6 fw-bold"
-                type="submit"><i class="bi bi-box-arrow-in-right mx-1 text-center"></i><span
-                  class="text-center fs-5">Entrar</span></button>
-            </div>
-          </div>
+    <div v-if="toGo.galery"
+      class="container-md col-md-12 d-flex justify-content-center align-items-center flex-column mb-4 mb-xl-0 fl">
+      <section class="galery-tittle">
+        <h2>Galeria De <span class="h2-color">Imagenes</span></h2>
+        </h2>
+      </section>
+      <section class="galery mx-auto">
+        <img src="/assets/img/img-1.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
+        <img src="/assets/img/img-2.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
+        <img src="/assets/img/img-3.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
+        <img src="/assets/img/img-4.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
+      </section>
+      <div
+        class="my-5 mx-auto text-center d-flex justify-content-center align-items-center gap-5 flex-md-row flex-column">
+        <div class="container-xl d-flex justify-content-center align-items-center flex-column"><span
+            class="fs-5 my-2">Entrar
+            a tu cuenta
+          </span>
+          <button @click="changeViewLogin"
+            class="d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
+            type="submit"><i class="bi bi-box-arrow-in-right mx-1 text-center"></i><span
+              class="text-center fs-3">LogIn</span></button>
         </div>
-      </form>
+        <div class="container d-flex justify-content-center align-items-center flex-column"><span
+            class="fs-5 my-2">Registrate Aqui👇
+          </span>
+          <button @click="changeViewRegister"
+            class="d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
+            type="submit"><i class="bi bi-person-add text-center"></i><span
+              class="text-center fs-3">Registrate</span></button>
+        </div>
+      </div>
     </div>
+
+    <template v-if="toGo.login">
+      <div class=" container-xl box-form">
+        <form>
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-6 d-flex mb-4 mb-xl-0">
+              <video class="video" src="assets/img/rickmorty-f958db7a.mp4" autoplay loop muted></video>
+            </div>
+            <div class="col-xl-6 d-flex flex-column justify-content-center">
+              <div class="mb-4 mx-5">
+                <h2 class="text-center mb-3 fw-bold">Iniciar <span class="h2-color">Sesión</span></h2>
+                <label class="form-label fs-3" for="user">Usuario</label>
+                <input class="form-control" type="text" id="user">
+              </div>
+              <div class="mb-4 mx-5">
+                <label class="form-label fs-3" for="password">Password</label>
+                <input class="form-control" type="text" id="password">
+              </div>
+              <div class="mb-4 mx-auto">
+                <button class="d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
+                  type="submit"><i class="bi bi-box-arrow-in-right mx-1 text-center"></i><span
+                    class="text-center fs-4">Entrar</span></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="container-xl d-flex justify-content-center my-5 flex-column">
+        <h4 class="text-center">¿No tienes una cuenta?</h4>
+        <h2 class="text-center"><span class="h2-color">Registrate Aqui👇</span></h2>
+        <button @click="changeViewRegister"
+          class="container-md col-md-3  d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
+          type="submit"><i class="bi bi-person-add text-center"></i><span
+            class="text-center fs-3">Registrate</span></button>
+      </div>
+    </template>
+
+    <template v-if="toGo.register">
+      <div class=" container-xl box-form">
+        <form>
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-10 d-flex flex-column justify-content-center">
+              <div class="mb-4 mx-5">
+                <h2 class="text-center my-3 fw-bold">Registrar <span class="h2-color">Nuevo Usuario</span></h2>
+                <label class="form-label fs-3" for="user">Usuario</label>
+                <input class="form-control" type="text" id="user">
+              </div>
+              <div class="mb-4 mx-5">
+                <label class="form-label fs-3" for="password">Password</label>
+                <input class="form-control" type="text" id="password">
+              </div>
+              <div class="mb-4 mx-5">
+                <label class="form-label fs-3" for="name">Nombre Completo</label>
+                <input class="form-control" type="text" id="name">
+              </div>
+              <div class="mb-4 mx-5">
+                <label class="form-label fs-3" for="email">Correo</label>
+                <input class="form-control" type="email" id="email">
+              </div>
+              <div class="mb-4 mx-5">
+                <label class="form-label fs-3" for="tel">Telefono</label>
+                <input class="form-control" type="number" id="tel">
+              </div>
+              <div class="mb-4 mx-auto">
+                <button class="d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
+                  type="submit"><i class="bi bi-person-add text-center"></i><span
+                    class="text-center fs-4">Registrar</span></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="container-xl d-flex justify-content-center my-5 flex-column">
+        <h4 class="text-center">¿Ya Tienes Cuenta?</h4>
+        <h2 class="text-center"><span class="h2-color">Ingresa Aqui👇</span></h2>
+        <button @click="changeViewLogin"
+          class="container-md col-md-3  d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
+          type="submit"><i class="bi bi-box-arrow-in-right mx-1 text-center"></i><span
+            class="text-center fs-3">Entrar</span></button>
+      </div>
+    </template>
 
   </div>
 

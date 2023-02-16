@@ -3,13 +3,35 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      first: "",
+      toGo: {
+        login: false,
+        register: false,
+        galery: true,
+      },
     };
   },
 
-  methods: {},
+  methods: {
+    changeViewLogin() {
+      this.toGo = {
+        login: true,
+        register: false,
+        galery: false,
+      };
 
-  created() {
-    console.log("Hello world");
+      document.title = "Login";
+    },
+
+    changeViewRegister() {
+      this.toGo = {
+        login: false,
+        register: true,
+        galery: false,
+      };
+
+      document.title = "Registro";
+    },
   },
+
+  created() {},
 }).mount("#root");
