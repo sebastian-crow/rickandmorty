@@ -6,8 +6,10 @@ createApp({
       first: "",
     };
   },
+
   methods: {},
-  mounted() {
+
+  created() {
     console.log("Hello world");
   },
 }).mount("#root");
