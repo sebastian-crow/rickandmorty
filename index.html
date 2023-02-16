@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick And Morty</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h1>Welcome Welcome</h1>
+      <p>
+        <!-- use the router-link component for navigation. -->
+        <!-- specify the link by passing the `to` prop. -->
+        <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
+        <router-link to="/">Go to Home</router-link>
+        <router-link to="/login">Go to Login</router-link>
+        <router-link to="/register">Go to Register</router-link>
+        <router-link to="/user">Go to User</router-link>
+        <router-link to="/auction">Go to Auction</router-link>
+      </p>
+      <!-- route outlet -->
+      <!-- component matched by the route will render here -->
+      <router-view></router-view>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
