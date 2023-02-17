@@ -103,7 +103,22 @@ body {
   border: 3px solid transparent;
   overflow: hidden;
   padding: 0 !important;
-  animation: border-color 5s ease-in-out infinite;
+  animation: border-color 5s ease-in-out infinite, fadeTraslateX 1s linear 1;
+}
+
+.box-extra {
+  animation: fadeTraslateX 1s linear 1;
+}
+
+@keyframes fadeTraslateX {
+  0% {
+    opacity: 0;
+    transform: translateX(-1000px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .btn-first {
@@ -138,4 +153,9 @@ input[type="number"]:focus {
   scale: 1.04;
   border: 2px solid #000 !important;
   box-shadow: 2px 2px 0px var(--color-3);
+}
+
+/* sweet-alert */
+.swal2-styled.swal2-confirm {
+  background-color: var(--color-1) !important;
 }

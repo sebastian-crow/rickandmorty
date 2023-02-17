@@ -22,7 +22,7 @@
 
 <body>
 
-  <div id="root" class="p-3">
+  <div id="app" class="p-3">
 
     <header class="container-xl box-header mb-3"></header>
 
@@ -33,10 +33,10 @@
         </h2>
       </section>
       <section class="galery mx-auto">
-        <img src="/assets/img/img-1.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
-        <img src="/assets/img/img-2.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
         <img src="/assets/img/img-3.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
         <img src="/assets/img/img-4.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
+        <img src="/assets/img/img-5.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
+        <img src="/assets/img/img-6.jpg" alt="rickyandmorty" class="img-fluid img-fluid-img">
       </section>
       <div
         class="my-5 mx-auto text-center d-flex justify-content-center align-items-center gap-5 flex-md-row flex-column">
@@ -61,8 +61,8 @@
     </div>
 
     <template v-if="toGo.login">
-      <div class=" container-xl box-form">
-        <form>
+      <div class="container-xl box-form">
+        <form @submit.prevent="login">
           <div class="row d-flex justify-content-center align-items-center">
             <div class="col-xl-6 d-flex mb-4 mb-xl-0">
               <video class="video" src="assets/img/rickmorty-f958db7a.mp4" autoplay loop muted></video>
@@ -71,11 +71,12 @@
               <div class="mb-4 mx-5">
                 <h2 class="text-center mb-3 fw-bold">Iniciar <span class="h2-color">Sesión</span></h2>
                 <label class="form-label fs-3" for="user">Usuario</label>
-                <input class="form-control" type="text" id="user">
+                <input v-model="formLogin.username" class="form-control" type="text" id="user">
+                <span></span>
               </div>
               <div class="mb-4 mx-5">
                 <label class="form-label fs-3" for="password">Password</label>
-                <input class="form-control" type="text" id="password">
+                <input v-model="formLogin.password" class="form-control" type="password" id="password">
               </div>
               <div class="mb-4 mx-auto">
                 <button class="d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
@@ -86,7 +87,7 @@
           </div>
         </form>
       </div>
-      <div class="container-xl d-flex justify-content-center my-5 flex-column">
+      <div class="container-xl d-flex justify-content-center my-5 flex-column box-extra">
         <h4 class="text-center">¿No tienes una cuenta?</h4>
         <h2 class="text-center"><span class="h2-color">Registrate Aqui👇</span></h2>
         <button @click="changeViewRegister"
@@ -98,29 +99,29 @@
 
     <template v-if="toGo.register">
       <div class=" container-xl box-form">
-        <form>
+        <form ref="anyName" @submit.prevent="register">
           <div class="row d-flex justify-content-center align-items-center">
             <div class="col-xl-10 d-flex flex-column justify-content-center">
               <div class="mb-4 mx-5">
                 <h2 class="text-center my-3 fw-bold">Registrar <span class="h2-color">Nuevo Usuario</span></h2>
                 <label class="form-label fs-3" for="user">Usuario</label>
-                <input class="form-control" type="text" id="user">
+                <input v-model="formRegister.username" class="form-control" type="text" id="user">
               </div>
               <div class="mb-4 mx-5">
                 <label class="form-label fs-3" for="password">Password</label>
-                <input class="form-control" type="text" id="password">
+                <input v-model="formRegister.password" class="form-control" type="password" id="password">
               </div>
               <div class="mb-4 mx-5">
                 <label class="form-label fs-3" for="name">Nombre Completo</label>
-                <input class="form-control" type="text" id="name">
+                <input v-model="formRegister.fullName" class="form-control" type="text" id="name">
               </div>
               <div class="mb-4 mx-5">
-                <label class="form-label fs-3" for="email">Correo</label>
-                <input class="form-control" type="email" id="email">
+                <label class="form-label fs-3" for="email">Email</label>
+                <input v-model="formRegister.email" class="form-control" type="email" id="email">
               </div>
               <div class="mb-4 mx-5">
                 <label class="form-label fs-3" for="tel">Telefono</label>
-                <input class="form-control" type="number" id="tel">
+                <input v-model="formRegister.cellPhone" class="form-control" type="number" id="tel">
               </div>
               <div class="mb-4 mx-auto">
                 <button class="d-flex justify-content-center align-items-center btn btn-first text-center fs-4 fw-bold"
@@ -131,7 +132,7 @@
           </div>
         </form>
       </div>
-      <div class="container-xl d-flex justify-content-center my-5 flex-column">
+      <div class="container-xl d-flex justify-content-center my-5 flex-column box-extra">
         <h4 class="text-center">¿Ya Tienes Cuenta?</h4>
         <h2 class="text-center"><span class="h2-color">Ingresa Aqui👇</span></h2>
         <button @click="changeViewLogin"
@@ -143,8 +144,8 @@
 
   </div>
 
-
-  <script src=" https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="main.js"></script>
 </body>
 
