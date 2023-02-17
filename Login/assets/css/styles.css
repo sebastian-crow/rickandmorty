@@ -148,8 +148,8 @@ body {
   color: #fff !important;
   border: none !important;
   border: 2px solid #000 !important;
-  box-shadow: 2px 2px 0px var(--color-1);
-  background-color: var(--color-5) !important;
+  box-shadow: 2px 2px 0px var(--color-2);
+  background-color: var(--color-1) !important;
   padding: 0.5rem 1rem !important;
   opacity: 0.95;
   transition: 0.3s ease !important;

@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/Login/assets/css/styles.css">
+
   <title>Bienvenido!</title>
 </head>
 
@@ -26,19 +27,20 @@
     <div class="container-md col-md-12 d-flex justify-content-center align-items-center flex-column mb-4 mb-xl-0 fl">
 
       <section class="galery-tittle">
-        <h2 class="text-center mb-3 fw-bold">Compra <span class="h2-color">Creditos</span></h2>
+        <h2 class="text-center mb-3 fw-bold">Compra Monedas <span class="h2-color">RickyCoins</span></h2>
         </h2>
       </section>
 
       <div class="grid-fluid">
 
-        <template v-for="{dataPrice,name,images,description,} in productsApi">
-          <div class=" card card-first" :data-price="dataPrice">
+        <template v-for="{dataPrice,name,images,description,price} in productsApi">
+          <div class="card card-first" :data-price="dataPrice">
             <img :src="images[0]" class="card-img-top" :alt="name">
             <div class="card-body">
-              <h5 class="card-title my-3">{{name}}</h5>
+              <h5 class="card-title my-3 h2-color border-bottom border-top py-2 bg-color rounded">{{name}}</h5>
               <span class="card-text d-block" style="font-size: 0.9rem !important;">{{description}}</span>
-              <a href=" #" class="btn btn-buy my-4">Comprar Credito</a>
+              <h4 class="card-text d-block my-3">{{price}} <span class="h2-color">COP</span></h4>
+              <button @click="buyCoins" class="btn btn-buy my-4">Comprar Credito</button>
             </div>
           </div>
         </template>
@@ -88,6 +90,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script src="main.js" type="module"></script>
+  <script src="https://js.stripe.com/v3/"></script>
 </body>
 
 </html>
