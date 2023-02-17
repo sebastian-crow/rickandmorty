@@ -23,20 +23,25 @@
 
     <header class="container-xl box-header mb-3"></header>
 
-    <div class="container-md col-md-12 d-flex justify-content-center align-items-center flex-column mb-4 mb-xl-0 fl">
-      <section class="galery-tittle">
-        <h2 class="text-center mb-3 fw-bold">Gracias por tu compra de <span class="h2-color">RickyCoins</span></h2>
-        </h2>
+    <div class=" container-md col-md-12 d-flex justify-content-center align-items-center flex-column mb-4 mb-xl-0">
+      <section
+        class="container-md box-form galery-tittle d-flex justify-content-center align-items-center flex-column p-3">
+        <h2 class="text-center mb-3 fw-bold my-4">Gracias por tu compra de <span class="h2-color">RickyCoins</span></h2>
+        <video class="container-md col-md-6 my-4 " src="../../Login/assets/img/rickmorty-f958db7a.mp4" autoplay
+          muted></video>
+        <ul>
+          <li></li>
+        </ul>
       </section>
     </div>
-    <template v-if="showLoader">
+    <!-- <template v-if="showLoader">
       <div class="spinner-ricky d-flex justify-content-center align-items-center flex-column gap-3">
         <div class="loader-container d-flex justify-content-center align-items-center">
           <img src="../Login/assets/img/rick-and-morty-gif-3.gif" alt="">
         </div>
         <span class="fs-3 fw-bold">Cargando...</span>
       </div>
-    </template>
+    </template> -->
 
 
 
@@ -45,7 +50,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <script src="https://js.stripe.com/v3/"></script>
   <script src="main.js" type="module"></script>
 </body>
 

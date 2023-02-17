@@ -60,7 +60,7 @@
 
     <template v-if="toGo.login">
       <div class="container-xl box-form">
-        <form @submit.prevent="login">
+        <form ref="formLogin" @submit.prevent="login">
           <div class="row d-flex justify-content-center align-items-center">
             <div class="col-xl-6 d-flex mb-4 mb-xl-0">
               <video class="video" src="assets/img/rickmorty-f958db7a.mp4" autoplay loop muted></video>

@@ -3,23 +3,12 @@ import STRIPE from "./assets/stripe-keys.js";
 var app = new Vue({
   el: "#app",
   data: {
+    users: [],
     productsApi: [],
     productsApiID: [],
     showLoader: false,
-    paymentCard: [
-      {
-        bank: "Visa",
-        numbers: [4242424242424242, 4000056655665556],
-      },
-
-      {
-        bank: "Mastercard",
-        numbers: [
-          5555555555554444, 2223003122003222, 5200828282828210,
-          5105105105105100,
-        ],
-      },
-    ],
+    isUserActive: {},
+    paymentCard: ["Visa", "4242424242424242"],
   },
 
   methods: {
@@ -90,49 +79,51 @@ var app = new Vue({
     },
 
     buyCoins(e) {
-      let price =
-        e.target.parentElement.parentElement.getAttribute("data-price");
+      let coins = e.target.getAttribute("data-amount").slice(0, -10).trim();
+      localStorage.setItem("coins", coins);
+
+      console.log(Stripe);
+      // console.log(coins);
+
+      // let price =
+      //   e.target.parentElement.parentElement.getAttribute("data-price");
       // console.log(price);
-      this.showLoader = true;
-      Stripe(STRIPE.public)
-        .redirectToCheckout({
-          lineItems: [{ price, quantity: 1 }],
-          mode: "payment",
-          successUrl:
-            "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
-          cancelUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-cancel.html",
-        })
-        .then((res) => {
-          alert(res);
-          console.log(res.error);
-          $tacos.insertAdjacentHTML("afterend", res.error.message);
-          return result.json();
-        });
-      this.showLoader = true;
+      // this.showLoader = true;
+      // Stripe(STRIPE.public)
+      //   .redirectToCheckout({
+      //     lineItems: [{ price, quantity: 1 }],
+      //     mode: "payment",
+      //     successUrl:
+      //       "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
+      //     cancelUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-cancel.html",
+      //   })
+      //   .then((res) => {
+      //     alert(res);
+      //     console.log(res.error);
+      //     console.log(res.json());
+      //   });
+      // this.showLoader = true;
     },
   },
 
   created() {
-    this.getProducts();
-  },
-  mouted() {},
-});
+    let users = JSON.parse(localStorage.getItem("users"));
+    if (users !== null) {
+      this.users = users;
+    }
 
-// d.addEventListener("click", (e) => {
-//   if (e.target.matches(".taco *")) {
-//     let price = e.target.parentElement.dataset.price;
-//     // console.log(price);
-//     Stripe(STRIPE_KEYS.public)
-//       .redirectToCheckout({
-//         lineItems: [{ price, quantity: 1 }],
-//         mode: "subscription",
-//         successUrl: "http://127.0.0.1:5500/ajax-ejercicios/assets/succes.html",
-//         cancelUrl: "http://127.0.0.1:5500/ajax-ejercicios/assets/cancel.html",
-//       })
-//       .then((res) => {
-//         alert(res);
-//         console.log(res.error);
-//         $tacos.insertAdjacentHTML("afterend", res.error.message);
-//       });
-//   }
-// });
+    let isActive = JSON.parse(localStorage.getItem("userActive"));
+    if (isActive !== null) {
+      this.getProducts();
+      this.isUserActive = isActive;
+    } else {
+      location.href = "../Login/index.html";
+    }
+
+    // this.redirectToCoins();
+  },
+
+  mouted() {
+    this.showLoader = false;
+  },
+});

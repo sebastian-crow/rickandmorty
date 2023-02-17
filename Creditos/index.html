@@ -33,17 +33,33 @@
 
       <div class="grid-fluid">
 
-        <template v-for="{dataPrice,name,images,description,price} in productsApi">
+        <template v-for="({dataPrice,name,images,description,price}, i) in productsApi" :key="i">
           <div class="card card-first" :data-price="dataPrice">
             <img :src="images[0]" class="card-img-top" :alt="name">
             <div class="card-body">
               <h5 class="card-title my-3 h2-color border-bottom border-top py-2 bg-color rounded">{{name}}</h5>
               <span class="card-text d-block" style="font-size: 0.9rem !important;">{{description}}</span>
               <h4 class="card-text d-block my-3">{{price}} <span class="h2-color">COP</span></h4>
-              <button @click="buyCoins" class="btn btn-buy my-4">Comprar Credito</button>
+              <button @click="buyCoins" class="btn btn-buy my-4" :data-amount="name">Comprar Credito</button>
             </div>
           </div>
         </template>
+
+        <div class="content-payment" for="btnControl">
+
+          <input type="checkbox" id="btnControl" />
+          <label for="btnControl">
+            <div class="credit-card">
+              <i class="bi bi-credit-card"></i><span> Prueba Tarjeta</span>
+              <div class="list-card d-none">
+                <ul v-for="(card, i) in paymentCard">
+                  <li>{{card}}</li>
+                </ul>
+              </div>
+            </div>
+          </label>
+
+        </div>
 
       </div>
 

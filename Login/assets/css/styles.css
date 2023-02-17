@@ -224,3 +224,34 @@ input[type="number"]:focus {
     transform: rotate(360deg);
   }
 }
+
+.content-payment {
+  display: flex !important;
+  position: fixed !important;
+  bottom: 2% !important;
+  right: 2%;
+  font-size: 1.2rem;
+  background-color: var(--color-6);
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  z-index: 100;
+  text-align: center;
+  margin: 0 auto !important;
+  cursor: pointer;
+}
+.content-payment label {
+  cursor: pointer;
+}
+
+#btnControl {
+  display: none !important;
+}
+
+#btnControl:checked + label .list-card,
+ul {
+  display: block !important;
+  text-align: left;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  list-style: none !important;
+}

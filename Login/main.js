@@ -33,6 +33,7 @@ var app = new Vue({
       };
 
       document.title = "Login";
+      this.submitForm();
     },
     changeViewRegister() {
       this.toGo = {
@@ -42,11 +43,15 @@ var app = new Vue({
       };
 
       document.title = "Registro";
+      this.submitFormLogin();
     },
 
     // Funcion reset form
     submitForm() {
       this.$refs.anyName.reset();
+    },
+    submitFormLogin() {
+      this.$refs.formLogin.reset();
     },
 
     // Funciones para validar formulario con expresiones regulares
@@ -169,12 +174,42 @@ var app = new Vue({
       const { username, password } = this.formLogin;
       if (this.verifyLogin(username, password, this.users)) {
         //Consulta api y redireccion al la ruta
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "success",
+          title: "Usuario Verificado Correctamente",
+        });
         this.showLoader = true;
         setTimeout(() => {
-          alert("Bienvenido " + username);
           location.href = "../Creditos/index.html";
         }, 1000);
+        this.isUserActive = {
+          username,
+          password,
+          isActive: true,
+          RickyCoins: 0,
+        };
+        localStorage.setItem("userActive", JSON.stringify(this.isUserActive));
         this.showLoader = false;
+      }
+    },
+
+    redirectToCoins() {
+      let isActive = JSON.parse(localStorage.getItem("userActive"));
+      if (isActive !== null) {
+        this.isUserActive = isActive;
+        location.href = "../Creditos/index.html";
       }
     },
 
@@ -206,6 +241,10 @@ var app = new Vue({
     if (users !== null) {
       this.users = users;
     }
+
+    this.showLoader = true;
+    this.redirectToCoins();
+    this.showLoader = false;
   },
   mounted() {
     this.showLoader = false;
