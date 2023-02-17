@@ -134,8 +134,41 @@ body {
 
 .btn-first:hover {
   opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
+
+/* creditos */
+.grid-fluid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+}
+
+.btn-buy {
+  color: #fff !important;
+  border: none !important;
+  border: 2px solid #000 !important;
+  box-shadow: 2px 2px 0px var(--color-1);
+  background-color: var(--color-5) !important;
+  padding: 0.5rem 1rem !important;
+  opacity: 0.95;
+  transition: 0.3s ease !important;
+}
+.btn-buy:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.card-first {
+  background-color: #0c010f !important;
+  height: auto;
+  border-radius: 3rem;
+  border: 3px solid transparent;
+  text-align: center;
+  overflow: hidden;
+  animation: border-color 5s ease-in-out infinite, fadeTraslateX 1s linear 1;
+}
+/* fin creditos */
 
 input[type="text"],
 input[type="password"],
@@ -158,4 +191,36 @@ input[type="number"]:focus {
 /* sweet-alert */
 .swal2-styled.swal2-confirm {
   background-color: var(--color-1) !important;
+}
+
+/* loader */
+.loader-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+  vertical-align: middle;
+  animation: rotate360 1s linear infinite, border-color 5s ease-in-out infinite;
+}
+
+.spinner-ricky {
+  display: flex;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0c010f;
+  z-index: 99;
+  overflow: hidden;
+}
+
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

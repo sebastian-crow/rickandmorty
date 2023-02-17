@@ -11,12 +11,16 @@ var app = new Vue({
       username: "",
       password: "",
       fullName: "",
+      email: "",
       cellPhone: "",
     },
     formLogin: {
       username: "",
       password: "",
     },
+
+    showLoader: false,
+    isUserActive: {},
   },
 
   methods: {
@@ -95,7 +99,7 @@ var app = new Vue({
       Swal.fire({
         icon: "error",
         title: "Email...",
-        text: `El email ${email || ""} no es valido`,
+        text: `El email ${email} no es valido`,
       });
       return false;
     },
@@ -164,13 +168,13 @@ var app = new Vue({
     login() {
       const { username, password } = this.formLogin;
       if (this.verifyLogin(username, password, this.users)) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Existe",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        //Consulta api y redireccion al la ruta
+        this.showLoader = true;
+        setTimeout(() => {
+          alert("Bienvenido " + username);
+          location.href = "../Creditos/index.html";
+        }, 1000);
+        this.showLoader = false;
       }
     },
 
@@ -202,5 +206,8 @@ var app = new Vue({
     if (users !== null) {
       this.users = users;
     }
+  },
+  mounted() {
+    this.showLoader = false;
   },
 });
