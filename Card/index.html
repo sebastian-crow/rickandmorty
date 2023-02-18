@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick And Morty</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.module.css" />
+  </head>
+  <body>
+    <div id="root">
+      <h1>Welcome Welcome</h1>
+      <p>
+        <!-- use the router-link component for navigation. -->
+        <!-- specify the link by passing the `to` prop. -->
+        <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
+
+        <!--   <router-link to="/">Go to Home</router-link>
+        <router-link to="/login">Go to Login</router-link>
+        <router-link to="/register">Go to Register</router-link>
+        <router-link to="/user">Go to User</router-link>
+        <router-link to="/auction">Go to Auction</router-link> -->
+      </p>
+      <!--   <div
+        class="relative min-h-screen grid place-items-center font-mono bg-white"
+      >
+        <div class="absolute left-20 w-10 h-10">
+          <img src="./Img/arrow.png" alt="" />
+        </div>
+        <div class="absolute right-20 w-10 h-10">
+          <img src="./Img/arrow.png" class="transform rotate-180" alt="" />
+        </div>
+        <div
+          class="bg-white rounded-md bg-gray-800 shadow-lg border-2 border-black"
+        >
+          <div class="md:flex px-4 leading-none max-w-4xl">
+            <div class="flex-none">
+              <img
+                src="https://creativereview.imgix.net/content/uploads/2019/12/joker_full.jpg?auto=compress,format&q=60&w=1012&h=1500"
+                alt="pic"
+                class="h-72 w-56 rounded-md shadow-2xl transform -translate-y-4 border-4 border-gray-300 shadow-lg"
+              />
+            </div>
+
+            <div class="flex-col text-black">
+              <p class="pt-4 text-2xl font-bold">Joker (2020)</p>
+              <hr class="hr-text" data-content="" />
+              <div class="text-md flex justify-between px-4 my-2">
+                <span class="font-bold">2h 2min | Crime, Drama, Thriller</span>
+                <span class="font-bold"></span>
+              </div>
+              <p class="hidden md:block px-4 my-4 text-sm text-left">
+                In Gotham City, mentally troubled comedian Arthur Fleck is
+                disregarded and mistreated by society. He then embarks on a
+                downward spiral of revolution and bloody crime. This path brings
+                him face-to-face with his alter-ego: the Joker.
+              </p>
+              <br />
+              <div class="grid grid-cols-4">
+                <p class="col-span-2flex text-md px-4 my-2 w-72">
+                  Precio Base
+                  <span class="font-bold px-2">|</span>
+                  20.000 COP
+                </p>
+                <div class="text-xs col-span-2 -my-2 -mx-36 place-self-end">
+                  <button
+                    type="button"
+                    class="border-2 border-black text-black rounded-none px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 hover:text-white focus:outline-none focus:shadow-outline"
+                    @click="setOpen"
+                    v-show="!open"
+                  >
+                    Adquirir
+                  </button>
+                  <button
+                    type="button"
+                    class="border-2 border-black text-black rounded-none px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 hover:text-white focus:outline-none focus:shadow-outline"
+                    @click="setClose"
+                    v-show="open"
+                  >
+                    Desistir
+                  </button>
+                </div>
+              </div>
+              <div
+                class="mt-20 w-full h-36 border-2 border-black"
+                v-if="open"
+              ></div>
+
+             
+            </div>
+          </div>
+          <div class="flex justify-between items-center px-4 mb-4 ml-2 w-20">
+            <div class="flex">
+              <i class="material-icons mr-10 text-red-600">favorite_border</i>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!--    <div
+        class="p-24 flex flex-wrap grid grid-cols-4 items-center justify-center border-2 border-black"
+      >
+        <div
+          class="flex-shrink-0 m-6 relative overflow-hidden bg-white-500 border-2 border-black rounded-sm max-w-xs shadow-lg transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2"
+          v-for="card in Cards"
+        >
+          <svg
+            class="absolute bottom-0 left-0 mb-8"
+            viewBox="0 0 375 283"
+            fill="none"
+            style="transform: scale(1.5); opacity: 0.1"
+          >
+            <rect
+              x="159.52"
+              y="175"
+              width="152"
+              height="152"
+              rx="8"
+              transform="rotate(-45 159.52 175)"
+              fill="white"
+            />
+            <rect
+              y="107.48"
+              width="152"
+              height="152"
+              rx="8"
+              transform="rotate(-45 0 107.48)"
+              fill="white"
+            />
+          </svg>
+          <div class="relative pt-10 px-10 flex items-center justify-center">
+            <div
+              class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+              style="
+                background: radial-gradient(black, transparent 60%);
+                transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
+                opacity: 0.2;
+              "
+            ></div>
+            <img class="relative w-40" :src="card.image" alt="" />
+          </div>
+          <div class="relative text-black px-6 pb-6 mt-6">
+            <span class="block opacity-75 -mb-1">{{ card.status }}</span>
+            <div class="relative grid grid-cols-2 mb-2 grid-rows-auto">
+              <span class="col-span-2 block w-full font-semibold text-xl"
+                >{{ card.name }}</span
+              >
+              <span
+                class="place-self-end block mt-6 col-span-2 bg-white rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] bg-yellow-200 h-10 border-2 border-black"
+                >$ {{card.price}} RAMC
+              </span>
+            </div>
+          </div>
+          <div
+            class="absolute p-8 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100"
+          >
+            <h3 class="mt-4 text-2xl font-medium">Go around the world</h3>
+
+            <p class="mt-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Cupiditate, praesentium voluptatem omnis atque culpa repellendus.
+            </p>
+
+            <p class="mt-8 font-bold">Read more</p>
+          </div>
+        </div>
+      </div> -->
+      <div class="w-full">
+        <a
+          href="./Auth/User/index.html"
+          class="absolute top-6 right-10 border-2 border-dashed border-black w-10 h-8 rounded-md bg-yellow-200"
+          >Favs</a
+        >
+        <a
+          href="./Auth/User/index.html"
+          class="absolute top-6 right-28 border-2 border-dashed border-black w-10 h-8 rounded-md bg-yellow-200"
+          >Compras</a
+        >
+        <div
+          class="lg:w-[92%] m-14 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8"
+        >
+          <div
+            href=""
+            class="col-span-2 group relative block h-96"
+            v-for="card in Cards"
+          >
+            <span
+              class="absolute inset-0 border-2 border-dashed border-black rounded-lg"
+            ></span>
+
+            <div
+              class="relative flex h-full rounded-lg transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2"
+            >
+              <div
+                class="px-8 pb-8 transition-opacity group-hover:absolute group-hover:opacity-0 rounded-lg"
+              >
+                <h1 class="text-2xl font-semibold">Disponible</h1>
+                <div
+                  class="relative pt-10 px-10 flex items-center justify-center"
+                >
+                  <div
+                    class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                    style="
+                      background: radial-gradient(black, transparent 60%);
+                      transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
+                      opacity: 0.2;
+                    "
+                  ></div>
+                  <img class="relative" :src="card.image" alt="" width="200" />
+                </div>
+                <div
+                  class="relative text-black px-6 pb-6 mt-6 border-2 border-dashed border-black rounded-lg"
+                >
+                  <span class="block col-span-2 opacity-75 -mb-1"
+                    >{{ card.status }}</span
+                  >
+                  <div
+                    class="grid grid-cols-2 relative mb-2 grid grid-rows-auto"
+                  >
+                    <span
+                      class="col-span-2 block w-full text-center font-semibold text-xl"
+                      >{{ card.name }}</span
+                    >
+                    <span
+                      class="absolute top-4 -right-9 col-span-1 row-3 place-self-end block mt-4 col-span-2 bg-white rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[6rem] h-10 border-2 border-dashed border-black"
+                      >$ {{card.price}} RC
+                    </span>
+                  </div>
+                </div>
+                <button
+                  v-if="card.favorite"
+                  class="absolute top-2 -left-2 h-4 row-3 place-self-end block mt-4 col-span-2 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                  @click="setFavorite(card.id)"
+                >
+                  <img src="Img/" alt="" width="30" />
+                </button>
+                <button
+                  v-if="!card.favorite"
+                  class="absolute top-2 left-2 h-4 block mt-4 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                  @click="setFavorite"
+                >
+                  <img src="Img/emptyHeart.png" alt="" width="30" />
+                </button>
+
+                <!--  <div
+                  class="relative text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                ></div> -->
+              </div>
+
+              <div
+                class="absolute p-8 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100"
+              >
+                <div class="relative">
+                  <div
+                    class="relative w-20 font-bold px-3 py-2 leading-none w-10 h-10"
+                  >
+                    <button
+                      v-if="card.favorite"
+                      class="absolute -top-2 -left-2 h-4 row-3 place-self-end block mt-4 col-span-2 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                      @click="noFavorite(card.id)"
+                    >
+                      <img src="Img/fillHeart.png" alt="" width="30" />
+                    </button>
+                    <button
+                      v-if="!card.favorite"
+                      class="absolute bottom-10 -left-6 h-4 block mt-4 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                      @click="setFavorite(card.id)"
+                    >
+                      <img src="Img/emptyHeart.png" alt="" width="30" />
+                    </button>
+                  </div>
+                  <h3 class="mt-4 text-2xl font-medium mb-2">
+                   <a href="./"> {{ card.name }}</a>
+                  </h3>
+                </div>
+
+                <!-- <p class="mt-4"></p> -->
+
+                <ul>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md">Status</code> {{
+                    card.status }}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md">Especie</code> {{
+                    card.species }}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md">Genero</code> {{
+                    card.gender }}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md"> Origen </code> {{
+                    card.origin.name}}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md"> Episodios </code> {{
+                    card.episode.length }}
+                  </li>
+                </ul>
+
+                <p class="mt-8 font-bold">Disponible</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- route outlet -->
+      <!-- component matched by the route will render here -->
+      <router-view></router-view>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

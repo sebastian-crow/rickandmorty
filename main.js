@@ -37,9 +37,17 @@ createApp({
         success: false,
       },
       open: false,
+      isOpen: false,
       favorite: false,
+      leave: false,
       favorites: [],
       localFavorites: "",
+      input: {
+        systemPrice: "",
+        randomPrice: "",
+        userPrice: 0,
+        success: false,
+      },
     };
   },
   computed: {
@@ -58,9 +66,37 @@ createApp({
 
     setOpen() {
       this.open = true;
+      this.isOpen = true;
     },
     setClose() {
       this.open = false;
+      this.isOpen = false;
+      this.input = {
+        systemPrice: "",
+        randomPrice: "",
+        userPrice: 0,
+        success: false,
+      };
+    },
+    leave() {
+      this.leave = !false;
+      this.isOpen = false;
+    },
+    buyCard(cardPrice) {
+      this.input.systemPrice = cardPrice;
+      const randomPrice = Math.floor(
+        Math.random() *
+          (this.input.systemPrice + 1000 - this.input.systemPrice + 1) +
+          this.input.systemPrice
+      );
+      if (this.input.randomPrice) {
+        this.input.success =
+          parseInt(this.input.userPrice) >= this.input.randomPrice
+            ? true
+            : false;
+      } else {
+        this.input.randomPrice = randomPrice;
+      }
     },
     setFavorite(cardId) {
       const cardsLoop = JSON.parse(JSON.stringify(this.Cards));
@@ -102,6 +138,10 @@ createApp({
             delete favs[i];
           }
         }
+
+        const result = favs.filter((f) => {
+          return f !== "";
+        });
 
         this.favorites = result;
         this.localFavorites = result;
@@ -146,6 +186,7 @@ createApp({
   beforeUpdate() {
     /*  console.log(this.Cards); */
     console.log(this.favorites);
+    console.log(this.input);
   },
   updated() {},
 })
