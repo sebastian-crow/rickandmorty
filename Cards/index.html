@@ -27,7 +27,7 @@
         <br />
         <section class="cardsGalery mx-auto w-[90%] max-h-full overflow-y-auto">
           <div class="w-full">
-            <!--       <a
+           <!--        <a
               href="./Auth/User/index.html"
               class="absolute top-6 right-10 border-2 border-dashed border-black w-28 h-8 rounded-md"
               >Favs</a
@@ -65,14 +65,14 @@
                     <div
                       class="relative pt-10 px-10 flex items-center justify-center"
                     >
-                      <div
+                   <!--    <div
                         class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
                         style="
                           background: radial-gradient(black, transparent 60%);
                           transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
                           opacity: 0.2;
                         "
-                      ></div>
+                      ></div> -->
                       <img
                         class="relative"
                         :src="card.image"
@@ -98,7 +98,7 @@
                       >$ {{card.price}} RC
                     </span>
                     <br />
-                    <button
+           <!--          <button
                       v-if="card.favorite"
                       class="absolute top-10 left-4 h-4 row-3 place-self-end block mt-4 col-span-2 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
                       @click="setFavorite(card.id)"
@@ -111,14 +111,14 @@
                       @click="setFavorite"
                     >
                       <img src="Img/emptyHeart.png" alt="" width="30" />
-                    </button>
+                    </button> -->
                   </div>
 
                   <div
                     class="absolute p-8 opacity-0 max-h-full overflow-y-auto transition-opacity group-hover:relative group-hover:opacity-100"
                   >
                     <div class="relative">
-                      <div
+                  <!--     <div
                         class="relative w-20 font-bold px-3 py-2 leading-none w-10 h-10"
                       >
                         <button
@@ -135,7 +135,7 @@
                         >
                           <img src="Img/emptyHeart.png" alt="" width="30" />
                         </button>
-                      </div>
+                      </div> -->
                       <h3 class="mt-4 text-2xl font-medium mb-2">
                         {{ card.name }}
                       </h3>
