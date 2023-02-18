@@ -192,7 +192,7 @@ var app = new Vue({
         });
         this.showLoader = true;
         setTimeout(() => {
-          location.href = "../Creditos/index.html";
+          location.href = "../Cards/index.html";
         }, 1000);
         this.isUserActive = {
           username,
@@ -209,7 +209,7 @@ var app = new Vue({
       let isActive = JSON.parse(localStorage.getItem("userActive"));
       if (isActive !== null) {
         this.isUserActive = isActive;
-        location.href = "../Creditos/index.html";
+        location.href = "../Cards/index.html";
       }
     },
 
