@@ -84,6 +84,11 @@ createApp({
     },
     buyCard(cardPrice) {
       this.input.systemPrice = cardPrice;
+      input.success =
+        parseInt(this.input.userPrice) >= this.input.systemPrice &&
+        parseInt(this.input.userPrice) - 100 >= this.input.systemPrice
+          ? true
+          : false;
       const randomPrice = Math.floor(
         Math.random() *
           (this.input.systemPrice + 1000 - this.input.systemPrice + 1) +
