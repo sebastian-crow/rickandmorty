@@ -1,28 +1,5 @@
 const { createApp } = Vue;
-/* 
-// Define route components
-import { Home } from "./Home/Home.js";
-import { Login } from "./Auth/Login/Login.js";
-import { Register } from "./Auth/Register/Register.js";
-import { User } from "./Auth/User/User.js";
-import { Auction } from "./Auction/Auction.js";
 
-// Define some routes
-// Each route should map to a component
-const routes = [
-  { path: "/", component: Home },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
-  { path: "/user", component: User },
-  { path: "/auction", component: Auction },
-];
-
-// Create the router instance and pass the 'routes' option
-const router = VueRouter.createRouter({
-  history: VueRouter.createWebHistory(),
-  routes,
-});
- */
 createApp({
   data() {
     return {
@@ -196,6 +173,4 @@ createApp({
   },
   beforeUpdate() {},
   updated() {},
-})
-  /*   .use(router) */
-  .mount("#root");
+}).mount("#root");
