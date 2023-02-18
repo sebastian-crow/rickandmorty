@@ -4,17 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!--  <link
-      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
-      rel="stylesheet"
-    /> -->
     <link rel="stylesheet" href="../Login/assets/css/styles.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.module.css" />
-    <title>Bienvenido!</title>
+    <title>Subasta</title>
   </head>
 
   <body>
@@ -22,29 +17,38 @@
       <header class="container-xl box-header mb-6"></header>
 
       <div
+        class="grid grid-cols-3 md:grid md:grid-cols-6 md:gap-y-4 m-4 w-[88%] sm:m-10 lg:ml-20 h-20"
+      >
+        <h1
+          class="col-span-3 place-self-start text-2xl font-semibold w-full h-full"
+        >
+          Bienvenido afortunado comprador User
+        </h1>
+        <a
+          href="./Auth/User/index.html"
+          class="md:col-span-3 md:place-self-end w-20 border-2 border-dashed border-black md:w-28 h-8 rounded-md border-2 border-white"
+          >Favs</a
+        >
+        <h1
+          class="col-span-3 place-self-start text-2xl font-semibold w-full h-full"
+        >
+          Tú cantidad de RickyCoins = $ 0 RC
+        </h1>
+        <a
+          href="./Auth/User/index.html"
+          class="md:col-span-3 md:place-self-end border-2 w-20 border-dashed border-black md:w-28 h-8 rounded-md border-2 border-white"
+        >
+          RickyCoins</a
+        >
+      </div>
+      <div
         class="container-md col-md-12 mb-10 mb-10 d-flex justify-content-center align-items-center flex-column mb-4 mb-xl-0 fl"
       >
         <br />
         <section class="cardsGalery mx-auto w-[90%] max-h-full overflow-y-auto">
           <div class="w-full">
-           <!--        <a
-              href="./Auth/User/index.html"
-              class="absolute top-6 right-10 border-2 border-dashed border-black w-28 h-8 rounded-md"
-              >Favs</a
-            >
-            <a
-              href="./Auth/User/index.html"
-              class="absolute top-6 right-44 border-2 border-dashed border-black w-28 h-8 rounded-md bg-yellow-200"
-              >Compras</a
-            >
-            <a
-              href="./Auth/User/index.html"
-              class="absolute top-6 right-80 border-2 border-dashed border-black w-28 h-8 rounded-md"
-            >
-              RickyCoins</a
-            > -->
             <div
-              class="lg:w-[92%] m-14 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8"
+              class="lg:w-[92%] m-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8"
             >
               <div
                 href=""
@@ -61,18 +65,20 @@
                   <div
                     class="px-8 pb-8 transition-opacity group-hover:absolute group-hover:opacity-0 rounded-lg"
                   >
-                    <h1 class="text-2xl font-semibold">Disponible</h1>
+                    <h1 class="text-2xl text-center font-semibold w-full">
+                      Disponible
+                    </h1>
                     <div
                       class="relative pt-10 px-10 flex items-center justify-center"
                     >
-                   <!--    <div
+                      <div
                         class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
                         style="
                           background: radial-gradient(black, transparent 60%);
                           transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
                           opacity: 0.2;
                         "
-                      ></div> -->
+                      ></div>
                       <img
                         class="relative"
                         :src="card.image"
@@ -80,15 +86,14 @@
                         width="200"
                       />
                     </div>
-                    <div class="relative text-white px-6 pb-6 mt-6 rounded-lg">
-                      <span class="block col-span-2 opacity-75 -mb-1"
+                    <div class="text-white mt-6 rounded-lg w-full">
+                      <span
+                        class="block col-span-2 opacity-75 -mb-1 w-full text-center mb-2"
                         >{{ card.status }}</span
                       >
-                      <div
-                        class="grid grid-cols-2 relative mb-6 grid grid-rows-auto"
-                      >
+                      <div class="grid grid-cols-2 relative mb-6 w-full">
                         <span
-                          class="col-span-2 block w-full text-center font-semibold text-xl"
+                          class="col-span-2 w-full text-center font-semibold text-lg"
                           >{{ card.name }}</span
                         >
                       </div>
@@ -98,7 +103,7 @@
                       >$ {{card.price}} RC
                     </span>
                     <br />
-           <!--          <button
+                    <!--          <button
                       v-if="card.favorite"
                       class="absolute top-10 left-4 h-4 row-3 place-self-end block mt-4 col-span-2 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
                       @click="setFavorite(card.id)"
@@ -118,7 +123,7 @@
                     class="absolute p-8 opacity-0 max-h-full overflow-y-auto transition-opacity group-hover:relative group-hover:opacity-100"
                   >
                     <div class="relative">
-                  <!--     <div
+                      <!--     <div
                         class="relative w-20 font-bold px-3 py-2 leading-none w-10 h-10"
                       >
                         <button
