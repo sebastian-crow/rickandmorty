@@ -1,0 +1,257 @@
+:root {
+  --color-1: #00afc6;
+  --color-2: #e4a788;
+  --color-3: #f0e14a;
+  --color-4: #97ce4c;
+  --color-5: #e89ac7;
+  --color-6: #44281d;
+}
+
+body {
+  font-family: "Itim", cursive !important;
+  background-color: #0c010f !important;
+  color: #fff !important;
+}
+
+.video {
+  width: 100%;
+  max-height: auto;
+  max-width: fit-content;
+  border-radius: 0.5rem;
+}
+
+.galery {
+  display: flex;
+  width: 100%;
+  height: 50vh;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 3px solid transparent;
+  border-radius: 0.5rem;
+  animation: border-color 5s ease-in-out infinite;
+}
+
+@keyframes border-color {
+  0% {
+    border: 3px solid var(--color-1);
+    box-shadow: 2px 2px 20px var(--color-5);
+  }
+  25% {
+    border: 3px solid var(--color-2);
+    box-shadow: 2px 2px 20px var(--color-3);
+  }
+  50% {
+    border: 3px solid var(--color-3);
+    box-shadow: 2px 2px 20px var(--color-2);
+  }
+  75% {
+    border: 3px solid var(--color-5);
+    box-shadow: 2px 2px 20px var(--color-1);
+  }
+  100% {
+    border: 3px solid var(--color-4);
+    box-shadow: 2px 2px 20px var(--color-2);
+  }
+}
+
+.galery img {
+  width: 0% !important;
+  flex-grow: 1 !important;
+  object-fit: cover !important;
+  opacity: 0.8;
+  transition: 0.5s ease-in-out;
+}
+.galery img:hover {
+  width: 100% !important;
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+.h2-color {
+  color: var(--color-1);
+}
+
+.box-header {
+  height: 25vh;
+  background-image: url(../img/Rick_and_Morty_logo-871ade10.png),
+    linear-gradient(180deg, rgba(195, 80, 80, 0) 40%, #010417 100%),
+    url(../img/rick-and-morty-cool-t3ynu5ly9m7jq6e2-721f7416.jpg);
+  background-size: 40vh, cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  animation: float 5s cubic-bezier(0, 0, 0, 0) infinite;
+}
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px #0009;
+    transform: translatey(0);
+  }
+  50% {
+    box-shadow: 0 25px 15px #0003;
+    transform: translatey(-20px);
+  }
+  to {
+    box-shadow: 0 5px 15px #0009;
+    transform: translatey(0);
+  }
+}
+
+.box-form {
+  width: 100%;
+  height: auto;
+  border-radius: 3rem;
+  border: 3px solid transparent;
+  overflow: hidden;
+  padding: 0 !important;
+  animation: border-color 5s ease-in-out infinite, fadeTraslateX 1s linear 1;
+}
+
+.box-extra {
+  animation: fadeTraslateX 1s linear 1;
+}
+
+@keyframes fadeTraslateX {
+  0% {
+    opacity: 0;
+    transform: translateX(-1000px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.btn-first {
+  color: #fff !important;
+  border: none !important;
+  border: 2px solid #000 !important;
+  box-shadow: 2px 2px 0px var(--color-3);
+  background-color: var(--color-4) !important;
+  padding: 0.5rem 1rem !important;
+  opacity: 0.95;
+  transition: 0.3s ease !important;
+}
+
+.btn-first:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* creditos */
+.grid-fluid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+}
+
+.btn-buy {
+  color: #fff !important;
+  border: none !important;
+  border: 2px solid #000 !important;
+  box-shadow: 2px 2px 0px var(--color-2);
+  background-color: var(--color-1) !important;
+  padding: 0.5rem 1rem !important;
+  opacity: 0.95;
+  transition: 0.3s ease !important;
+}
+.btn-buy:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.card-first {
+  background-color: #0c010f !important;
+  height: auto;
+  border-radius: 3rem;
+  border: 3px solid transparent;
+  text-align: center;
+  overflow: hidden;
+  animation: border-color 5s ease-in-out infinite, fadeTraslateX 1s linear 1;
+}
+/* fin creditos */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+  border: 2px solid #000 !important;
+  box-shadow: 2px 2px 0px var(--color-3);
+  transition: 0.3s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+  scale: 1.04;
+  border: 2px solid #000 !important;
+  box-shadow: 2px 2px 0px var(--color-3);
+}
+
+/* sweet-alert */
+.swal2-styled.swal2-confirm {
+  background-color: var(--color-1) !important;
+}
+
+/* loader */
+.loader-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+  vertical-align: middle;
+  animation: rotate360 1s linear infinite, border-color 5s ease-in-out infinite;
+}
+
+.spinner-ricky {
+  display: flex;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0c010f;
+  z-index: 99;
+  overflow: hidden;
+}
+
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content-payment {
+  display: flex !important;
+  position: fixed !important;
+  bottom: 2% !important;
+  right: 2%;
+  font-size: 1.2rem;
+  background-color: var(--color-6);
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  z-index: 100;
+  text-align: center;
+  margin: 0 auto !important;
+  cursor: pointer;
+}
+.content-payment label {
+  cursor: pointer;
+}
+
+#btnControl {
+  display: none !important;
+}
+
+#btnControl:checked + label .list-card,
+ul {
+  display: block !important;
+  text-align: left;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  list-style: none !important;
+}
