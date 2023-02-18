@@ -85,24 +85,24 @@ var app = new Vue({
       console.log(Stripe);
       // console.log(coins);
 
-      // let price =
-      //   e.target.parentElement.parentElement.getAttribute("data-price");
-      // console.log(price);
-      // this.showLoader = true;
-      // Stripe(STRIPE.public)
-      //   .redirectToCheckout({
-      //     lineItems: [{ price, quantity: 1 }],
-      //     mode: "payment",
-      //     successUrl:
-      //       "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
-      //     cancelUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-cancel.html",
-      //   })
-      //   .then((res) => {
-      //     alert(res);
-      //     console.log(res.error);
-      //     console.log(res.json());
-      //   });
-      // this.showLoader = true;
+      let price =
+        e.target.parentElement.parentElement.getAttribute("data-price");
+      console.log(price);
+      this.showLoader = true;
+      Stripe(STRIPE.public)
+        .redirectToCheckout({
+          lineItems: [{ price, quantity: 1 }],
+          mode: "payment",
+          successUrl:
+            "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
+          cancelUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-cancel.html",
+        })
+        .then((res) => {
+          alert(res);
+          console.log(res.error);
+          console.log(res.json());
+        });
+      this.showLoader = true;
     },
   },
 
