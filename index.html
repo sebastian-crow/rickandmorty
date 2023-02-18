@@ -170,6 +170,15 @@
                       <strong>APROBADA </strong>
                     </code>
                   </h1>
+
+                  <h1 v-if="input.validation" class="col-span-6">
+                    <code
+                      class="bg-yellow-200 rounded-md text-md w-20 font-bold"
+                    >
+                      <strong>Escribe tu propuesta </strong>
+                    </code>
+                  </h1>
+
                   <h1
                     v-if="input.randomPrice && !input.success"
                     class="col-span-6"
@@ -193,7 +202,7 @@
                   <div class="col-span-6 w-full" v-if="isOpen">
                     <button
                       class="mt-8 mr-10 font-bold place-self-end border-2 border-dashed rounded-lg border-black bg-green-200"
-                      @click="buyCard(card.price)"
+                      @click="buyCard(card.price, card)"
                     >
                       <span>Comprar</span>
                     </button>

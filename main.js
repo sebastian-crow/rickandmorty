@@ -76,31 +76,46 @@ createApp({
         randomPrice: "",
         userPrice: 0,
         success: false,
+        validation: false,
       };
     },
     leave() {
       this.leave = !false;
       this.isOpen = false;
     },
-    buyCard(cardPrice) {
-      this.input.systemPrice = cardPrice;
-      input.success =
-        parseInt(this.input.userPrice) >= this.input.systemPrice &&
-        parseInt(this.input.userPrice) - 100 >= this.input.systemPrice
-          ? true
-          : false;
-      const randomPrice = Math.floor(
-        Math.random() *
-          (this.input.systemPrice + 1000 - this.input.systemPrice + 1) +
-          this.input.systemPrice
-      );
-      if (this.input.randomPrice) {
+    buyCard(cardPrice, card) {
+      if (this.input.userPrice) {
+        this.input.systemPrice = cardPrice;
         this.input.success =
-          parseInt(this.input.userPrice) >= this.input.randomPrice
+          parseInt(this.input.userPrice) >= this.input.systemPrice &&
+          parseInt(this.input.userPrice) - 100 >= this.input.systemPrice
             ? true
             : false;
+        this.input.validation = !true;
+        const randomPrice = Math.floor(
+          Math.random() *
+            (this.input.systemPrice + 1000 - this.input.systemPrice + 1) +
+            this.input.systemPrice
+        );
+        if (this.input.randomPrice) {
+          this.input.success =
+            parseInt(this.input.userPrice) >= this.input.randomPrice
+              ? true
+              : false;
+        } else {
+          this.input.randomPrice = randomPrice;
+        }
       } else {
-        this.input.randomPrice = randomPrice;
+        this.input.validation = true;
+      }
+      if (this.input.success) {
+        let userCard = card;
+        userCard.ownerCode = this.User?.ownerCode;
+        const cartsSold = JSON.parse(localStorage.getItem("cartsSold"));
+        localStorage.setItem(
+          "cartsSold",
+          JSON.stringify([...cartsSold, userCard])
+        );
       }
     },
     setFavorite(cardId) {
@@ -166,33 +181,20 @@ createApp({
       })
       .catch((error) => console.log(error));
 
-    const local = JSON.parse(JSON.stringify(this.localFavorites));
-    /*  console.log(local); */
     this.Cards = cardsAPI.map((c) => {
       c.price = Math.floor(Math.random() * (10000 - 1000 + 1) + 1000);
-      /*      if (local) {
-        local.map((l) => {
-          if (c.id === l.id) c.favorite = l.favorite;
-        });
-      } */
-
       c.favorite = false;
       return c;
     });
   },
   beforeMount() {
-    console.log(this.Cards);
     this.localFavorites = JSON.parse(localStorage.getItem("favorites"));
   },
   mounted() {
     this.User = JSON.parse(localStorage.getItem("user"));
     this.isAuthenticated = this.User ? true : false;
   },
-  beforeUpdate() {
-    /*  console.log(this.Cards); */
-    console.log(this.favorites);
-    console.log(this.input);
-  },
+  beforeUpdate() {},
   updated() {},
 })
   /*   .use(router) */
