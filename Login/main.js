@@ -69,8 +69,7 @@ var app = new Vue({
     },
 
     validPassword(password) {
-      const expRegPassword =
-        /^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/gm;
+      const expRegPassword = /^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/gm;
       if (expRegPassword.test(password)) {
         return true;
       }
@@ -124,11 +123,7 @@ var app = new Vue({
 
     // funcion verificar si existe un user con el mismo username
     validUserExists(arrayUsers, username) {
-      if (
-        arrayUsers.some(
-          (el) => el.username.toLowerCase() === username.toLowerCase()
-        )
-      ) {
+      if (arrayUsers.some((el) => el.username.toLowerCase() === username.toLowerCase())) {
         Swal.fire({
           icon: "error",
           title: "Nombre Usuario...",
@@ -154,13 +149,7 @@ var app = new Vue({
 
     // funcion verificar user login
     verifyLogin(username, password, arrayUsers) {
-      if (
-        arrayUsers.find(
-          (el) =>
-            el.username.toLowerCase() === username.toLowerCase() &&
-            el.password === password
-        )
-      ) {
+      if (arrayUsers.find((el) => el.username.toLowerCase() === username.toLowerCase() && el.password === password)) {
         return true;
       }
       Swal.fire({
@@ -215,8 +204,7 @@ var app = new Vue({
 
     // funcion register
     register() {
-      const { username, password, fullName, email, cellPhone } =
-        this.formRegister;
+      const { username, password, fullName, email, cellPhone } = this.formRegister;
 
       if (
         this.validUsername(username) &&
@@ -228,10 +216,7 @@ var app = new Vue({
         // console.log("Registrado");
         this.validUserExists(this.users, username)
           ? false
-          : this.addUsers(
-              { username, password, fullName, email, cellPhone },
-              this.users
-            );
+          : this.addUsers({ username, password, fullName, email, cellPhone, RickyCoins: 0 }, this.users);
       }
     },
   },

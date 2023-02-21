@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../Login/assets/css/styles.css">
+  <!-- <script src="https://js.stripe.com/v3/"></script> -->
   <title>Pago Exitoso!</title>
 </head>
 
@@ -24,15 +25,35 @@
     <header class="container-xl box-header mb-3"></header>
 
     <div class=" container-md col-md-12 d-flex justify-content-center align-items-center flex-column mb-4 mb-xl-0">
+      <h2 class="text-center mb-3 fw-bold my-4 fs-md-5 fs-3">Gracias por tu compra de <span
+          class="h2-color">RickyCoins</span>
+      </h2>
       <section
-        class="container-md box-form galery-tittle d-flex justify-content-center align-items-center flex-column p-3">
-        <h2 class="text-center mb-3 fw-bold my-4">Gracias por tu compra de <span class="h2-color">RickyCoins</span></h2>
-        <video class="container-md col-md-6 my-4 " src="../../Login/assets/img/rickmorty-f958db7a.mp4" autoplay
-          muted></video>
-        <ul>
-          <li></li>
+        class="container-md box-form galery-tittle d-flex justify-content-center align-items-center flex-md-row-reverse flex-column-reverse my-2 gap-4">
+        <ul class="col-md-6" v-for="{name, phone,email, username, RickyCoins} in [showInfoUser]">
+          <li>
+            <h2 class="">Informacion De La Compra</h2>
+          </li>
+          <li>
+            <h4>Username : {{username}}</h4>
+          </li>
+          <li>
+            <h4>Nombre : {{name}}</h4>
+          </li>
+          <li>
+            <h4>Celular : {{phone}}</h4>
+          </li>
+          <li>
+            <h4>Email : {{email}}</h3>
+          </li>
+
+          <li class="h2-color">
+            <h2>RickyCoins Compradas : {{RickyCoins}}</h2>
+          </li>
         </ul>
+        <img class="img-fluid col-md-6" src="../../Login/assets/img/img-3.jpg" alt="RickyCoins">
       </section>
+
     </div>
     <!-- <template v-if="showLoader">
       <div class="spinner-ricky d-flex justify-content-center align-items-center flex-column gap-3">
@@ -48,7 +69,8 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="main.js" type="module"></script>
 </body>

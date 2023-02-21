@@ -73,8 +73,7 @@ body {
 
 .box-header {
   height: 25vh;
-  background-image: url(../img/Rick_and_Morty_logo-871ade10.png),
-    linear-gradient(180deg, rgba(195, 80, 80, 0) 40%, #010417 100%),
+  background-image: url(../img/Rick_and_Morty_logo-871ade10.png), linear-gradient(180deg, rgba(195, 80, 80, 0) 40%, #010417 100%),
     url(../img/rick-and-morty-cool-t3ynu5ly9m7jq6e2-721f7416.jpg);
   background-size: 40vh, cover, cover;
   background-position: center, center;
@@ -140,7 +139,7 @@ body {
 /* creditos */
 .grid-fluid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   gap: 1rem;
 }
 

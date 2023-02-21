@@ -42,9 +42,7 @@ var app = new Vue({
             // console.log(products);
 
             prices.forEach((el) => {
-              let productData = products.filter(
-                (product) => product.id === el.product
-              );
+              let productData = products.filter((product) => product.id === el.product);
               // console.log(productData);
               IdProducs.push(el.id);
               this.productsApiID = [...IdProducs.slice(0, 4)];
@@ -53,9 +51,7 @@ var app = new Vue({
               let newArray = this.productsApiID.map((el) => el);
               let newPrices = prices.map((el) => el.unit_amount_decimal);
               newPrices = [...newPrices.slice(0, 4)];
-              newPrices = newPrices.map((el) =>
-                formatter.format(`${el.slice(0, -2)}`)
-              );
+              newPrices = newPrices.map((el) => formatter.format(`${el.slice(0, -2)}`));
               // console.log(newPrices);
               this.productsApi = this.productsApi.map((product, index) => {
                 return {
@@ -71,30 +67,22 @@ var app = new Vue({
           })
           .catch((err) => {
             console.log(err);
-            let message =
-              err.statusText ||
-              "Ocurrio un error al conectar con la API de Stripe";
+            let message = err.statusText || "Ocurrio un error al conectar con la API de Stripe";
           })
       );
     },
 
     buyCoins(e) {
-      let coins = e.target.getAttribute("data-amount").slice(0, -10).trim();
-      localStorage.setItem("coins", coins);
+      this.showLoader = true;
 
-      console.log(Stripe);
-      // console.log(coins);
-
-      let price =
-        e.target.parentElement.parentElement.getAttribute("data-price");
+      let price = e.target.parentElement.parentElement.getAttribute("data-price");
       console.log(price);
       this.showLoader = true;
       Stripe(STRIPE.public)
         .redirectToCheckout({
           lineItems: [{ price, quantity: 1 }],
           mode: "payment",
-          successUrl:
-            "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
+          successUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
           cancelUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-cancel.html",
         })
         .then((res) => {
