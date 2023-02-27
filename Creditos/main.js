@@ -9,6 +9,7 @@ var app = new Vue({
     showLoader: false,
     isUserActive: {},
     paymentCard: ["Visa", "4242424242424242"],
+    cod: "76189a1a-620c-4656-bb71-2abccdfe5205",
   },
 
   methods: {
@@ -73,7 +74,11 @@ var app = new Vue({
     },
 
     buyCoins(e) {
-      this.showLoader = true;
+      let coins = e.target.getAttribute("data-amount").slice(0, -10).trim();
+      localStorage.setItem("coins", coins);
+
+      // console.log(Stripe);
+      // console.log(coins);
 
       let price = e.target.parentElement.parentElement.getAttribute("data-price");
       console.log(price);
@@ -82,8 +87,7 @@ var app = new Vue({
         .redirectToCheckout({
           lineItems: [{ price, quantity: 1 }],
           mode: "payment",
-          successUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
-          cancelUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-cancel.html",
+          successUrl: "https://76189a1a-620c-4656-bb71-2abccdfe5205.netlify.app/",
         })
         .then((res) => {
           alert(res);
