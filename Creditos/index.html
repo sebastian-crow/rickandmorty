@@ -14,7 +14,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+<<<<<<< HEAD
   <link rel="stylesheet" href="/Login/assets/css/styles.css">
+=======
+  <link rel="stylesheet" href="../assets/css/styles.css">
+>>>>>>> Seb
   <script src="https://js.stripe.com/v3/"></script>
   <title>Bienvenido!</title>
 </head>
@@ -31,7 +35,11 @@
         </h2>
       </section>
 
+<<<<<<< HEAD
       <div class="container-xl grid-fluid">
+=======
+      <div v-if="!isValidCheckout" class="container-xl grid-fluid">
+>>>>>>> Seb
 
         <template v-for="({dataPrice,name,images,description,price}, i) in productsApi" :key="i">
           <div class="card-first" :data-price="dataPrice">
@@ -47,7 +55,12 @@
         </template>
 
 
+<<<<<<< HEAD
         <div class="content-payment" for="btnControl">
+=======
+
+        <div class=" content-payment" for="btnControl">
+>>>>>>> Seb
           <input type="checkbox" id="btnControl" />
           <label for="btnControl">
             <div class="credit-card">
@@ -61,6 +74,30 @@
           </label>
         </div>
       </div>
+
+      <button @click="logOut" class="btn btn-danger out"> Cerrar Sesión</button>
+
+      <div v-if="!isValidCheckout" class="container-md text-center my-5 fs-6">
+        <table class="table table-hover table-dark">
+          <h2>Tus Datos De Usuario :</h2>
+          <thead>
+            <tr>
+              <th scope="col">Nombre De Usuario</th>
+              <th scope="col">Nombre Completo</th>
+              <th scope="col">Email</th>
+              <th scope="col">Celular</th>
+              <th scope="col">RickyCoins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td v-for="value, key in isUserActive" v-if="key !== 'password' && key!=='isActive'">{{value}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
 
 
 
@@ -90,13 +127,27 @@
       <template v-if="showLoader">
         <div class="spinner-ricky d-flex justify-content-center align-items-center flex-column gap-3">
           <div class="loader-container d-flex justify-content-center align-items-center">
-            <img src="../Login/assets/img/rick-and-morty-gif-3.gif" alt="">
+            <img src="../assets/img/rick-and-morty-gif-3.gif" alt="">
           </div>
           <span class="fs-3 fw-bold">Cargando...</span>
         </div>
       </template>
 
     </div>
+
+    <template v-if="isValidCheckout">
+      <div class="container-xl grid-fluid my-3 text-center">
+        <form @submit.prevent="runCode">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+              <label for="coins">Digita Tu Código De Compra</label>
+              <input v-model.trim="cod" type="text" class="form-control" id="coins">
+            </div>
+          </div>
+          <button class="btn btn-primary btn-first my-3" type="submit">Validar Código</button>
+        </form>
+      </div>
+    </template>
 
 
 
@@ -105,7 +156,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<<<<<<< HEAD
   <script src="main.js" type="module"></script>
+=======
+  <script src="main.js"></script>
+>>>>>>> Seb
 
 </body>
 

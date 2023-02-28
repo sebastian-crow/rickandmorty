@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick And Morty</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.module.css" />
+  </head>
+  <body>
+    <div id="root">
+      <h1>Welcome Welcome</h1>
+
+      <div class="w-full">
+        <a
+          href="./Auth/User/index.html"
+          class="absolute top-6 right-10 border-2 border-dashed border-black w-28 h-8 rounded-md"
+          >Favs</a
+        >
+        <a
+          href="./Auth/User/index.html"
+          class="absolute top-6 right-44 border-2 border-dashed border-black w-28 h-8 rounded-md bg-yellow-200"
+          >Compras</a
+        >
+        <a
+          href="./Auth/User/index.html"
+          class="absolute top-6 right-80 border-2 border-dashed border-black w-28 h-8 rounded-md"
+        >
+          RickyCoins</a
+        >
+        <div
+          class="lg:w-[92%] m-14 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8"
+        >
+          <div
+            href=""
+            class="col-span-2 group relative block h-96"
+            v-for="card in Cards"
+          >
+            <span
+              class="absolute inset-0 border-2 border-dashed border-black rounded-lg"
+            ></span>
+
+            <div
+              class="relative flex h-full rounded-lg transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2"
+            >
+              <div
+                class="px-8 pb-8 transition-opacity group-hover:absolute group-hover:opacity-0 rounded-lg"
+              >
+                <h1 class="text-2xl font-semibold">Disponible</h1>
+                <div
+                  class="relative pt-10 px-10 flex items-center justify-center"
+                >
+                  <div
+                    class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                    style="
+                      background: radial-gradient(black, transparent 60%);
+                      transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
+                      opacity: 0.2;
+                    "
+                  ></div>
+                  <img class="relative" :src="card.image" alt="" width="200" />
+                </div>
+                <div
+                  class="relative text-black px-6 pb-6 mt-6 border-2 border-dashed border-black rounded-lg"
+                >
+                  <span class="block col-span-2 opacity-75 -mb-1"
+                    >{{ card.status }}</span
+                  >
+                  <div
+                    class="grid grid-cols-2 relative mb-2 grid grid-rows-auto"
+                  >
+                    <span
+                      class="col-span-2 block w-full text-center font-semibold text-xl"
+                      >{{ card.name }}</span
+                    >
+                    <span
+                      class="absolute top-4 -right-9 col-span-1 row-3 place-self-end block mt-4 col-span-2 bg-white rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[6rem] h-10 border-2 border-dashed border-black"
+                      >$ {{card.price}} RC
+                    </span>
+                  </div>
+                </div>
+                <button
+                  v-if="card.favorite"
+                  class="absolute top-10 left-4 h-4 row-3 place-self-end block mt-4 col-span-2 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                  @click="setFavorite(card.id)"
+                >
+                  <img src="Img/fillHeart.png" alt="" width="30" />
+                </button>
+                <button
+                  v-if="!card.favorite"
+                  class="absolute top-10 left-4 h-4 block mt-4 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                  @click="setFavorite"
+                >
+                  <img src="Img/emptyHeart.png" alt="" width="30" />
+                </button>
+              </div>
+
+              <div
+                class="absolute p-8 opacity-0 max-h-full overflow-y-auto transition-opacity group-hover:relative group-hover:opacity-100"
+              >
+                <div class="relative">
+                  <div
+                    class="relative w-20 font-bold px-3 py-2 leading-none w-10 h-10"
+                  >
+                    <button
+                      v-if="card.favorite"
+                      class="absolute top-2 -left-2 h-4 row-3 place-self-end block mt-4 col-span-2 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                      @click="noFavorite(card.id)"
+                    >
+                      <img src="Img/fillHeart.png" alt="" width="30" />
+                    </button>
+                    <button
+                      v-if="!card.favorite"
+                      class="absolute top-2 -left-2 h-4 block mt-4 rounded-2xl text-black-500 text-sm font-bold px-3 py-2 leading-none flex items-center w-[7.4rem] h-10"
+                      @click="setFavorite(card.id)"
+                    >
+                      <img src="Img/emptyHeart.png" alt="" width="30" />
+                    </button>
+                  </div>
+                  <h3 class="mt-4 text-2xl font-medium mb-2">
+                    {{ card.name }}
+                  </h3>
+                </div>
+
+                <ul>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md">Status</code> {{
+                    card.status }}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md">Especie</code> {{
+                    card.species }}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md">Genero</code> {{
+                    card.gender }}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md"> Origen </code> {{
+                    card.origin.name}}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md"> Episodios </code> {{
+                    card.episode.length }}
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-gray-200 rounded-md"> Precio </code>
+                    <strong> $ </strong>{{ card.price }} RC
+                  </li>
+                  <li class="text-start">
+                    <code class="bg-green-200 rounded-md">
+                      <strong>Subtasta </strong>
+                    </code>
+                  </li>
+                </ul>
+
+                <div class="mt-4 mb-2 relative w-full grid grid-cols-6">
+                  <h1 v-if="input.success">
+                    <code class="bg-green-200 rounded-md text-lg font-bold">
+                      <strong>APROBADA </strong>
+                    </code>
+                  </h1>
+
+                  <h1 v-if="input.validation" class="col-span-6">
+                    <code
+                      class="bg-yellow-200 rounded-md text-md w-20 font-bold"
+                    >
+                      <strong>Escribe tu propuesta </strong>
+                    </code>
+                  </h1>
+
+                  <h1
+                    v-if="input.randomPrice && !input.success"
+                    class="col-span-6"
+                  >
+                    <code
+                      class="bg-yellow-200 rounded-md text-md w-20 font-bold"
+                    >
+                      <strong
+                        >El sistema quiere $ {{this.input.randomPrice}}
+                        RC</strong
+                      >
+                    </code>
+                  </h1>
+                  <button
+                    v-if="!isOpen"
+                    class="col-span-6 mt-2 font-bold place-self-end border-2 border-dashed rounded-lg border-black"
+                    @click="setOpen"
+                  >
+                    <span>Adquirir</span>
+                  </button>
+                  <div class="col-span-6 w-full" v-if="isOpen">
+                    <button
+                      class="mt-8 mr-10 font-bold place-self-end border-2 border-dashed rounded-lg border-black bg-green-200"
+                      @click="buyCard(card.price, card)"
+                    >
+                      <span>Comprar</span>
+                    </button>
+                    <button
+                      class="col-span-3 mt-8 font-bold place-self-start border-2 border-dashed rounded-lg border-black bg-red-200"
+                      @click="setClose"
+                    >
+                      <span>Desistir</span>
+                    </button>
+                  </div>
+
+                  <div
+                    class="mt-2 col-span-6 max-h-36 overflow-y-auto"
+                    v-if="isOpen"
+                  >
+                    <input
+                      type="text"
+                      class="col-span-6 w-full h-10 mt-6 text-sm text-black border-2 rounded-md border-dashed border-black"
+                      :placeholder="`$ ${card.price} RC Precio del sistema`"
+                      disabled
+                      v-model="input.systemPrice"
+                      v-show="!input.randomPrice"
+                    />
+                    <input
+                      type="text"
+                      class="col-span-6 w-full h-10 mt-6 text-sm text-black border-2 rounded-md border-dashed border-black"
+                      :placeholder="`El sistema quiere $ ${this.input.randomPrice} RC`"
+                      disabled
+                      v-show="input.randomPrice"
+                    />
+                    <input
+                      type="text"
+                      class="col-span-6 w-full h-10 mt-6 border-2 rounded-md border-dashed border-black"
+                      placeholder="Propuesta de $RC"
+                      v-model="input.userPrice"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
