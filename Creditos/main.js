@@ -14,9 +14,6 @@ var app = new Vue({
     showLoader: false,
     isUserActive: {},
     paymentCard: ["Visa", "4242424242424242"],
-<<<<<<< HEAD
-    cod: "76189a1a-620c-4656-bb71-2abccdfe5205",
-=======
     codes: [
       "326ac831-0538-4022-8ff0-632c89f420c7",
       "76189a1a-620c-4656-bb71-2abccdfe5205",
@@ -27,7 +24,6 @@ var app = new Vue({
     isValidCheckout: false,
     arrayFilterEvents: [],
     cod: null,
->>>>>>> Seb
   },
 
   methods: {
@@ -48,7 +44,7 @@ var app = new Vue({
             "userActive",
             JSON.stringify(this.isUserActive)
           );
-          location.href = '../index.html'
+          location.href = "../index.html";
         }
       });
     },
@@ -83,7 +79,9 @@ var app = new Vue({
             // console.log(products);
 
             prices.forEach((el) => {
-              let productData = products.filter((product) => product.id === el.product);
+              let productData = products.filter(
+                (product) => product.id === el.product
+              );
               // console.log(productData);
               IdProducs.push(el.id);
               this.productsApiID = [...IdProducs.slice(0, 4)];
@@ -92,7 +90,9 @@ var app = new Vue({
               let newArray = this.productsApiID.map((el) => el);
               let newPrices = prices.map((el) => el.unit_amount_decimal);
               newPrices = [...newPrices.slice(0, 4)];
-              newPrices = newPrices.map((el) => formatter.format(`${el.slice(0, -2)}`));
+              newPrices = newPrices.map((el) =>
+                formatter.format(`${el.slice(0, -2)}`)
+              );
               // console.log(newPrices);
               this.productsApi = this.productsApi.map((product, index) => {
                 return {
@@ -108,7 +108,9 @@ var app = new Vue({
           })
           .catch((err) => {
             console.log(err);
-            let message = err.statusText || "Ocurrio un error al conectar con la API de Stripe";
+            let message =
+              err.statusText ||
+              "Ocurrio un error al conectar con la API de Stripe";
           })
       );
     },
@@ -120,19 +122,16 @@ var app = new Vue({
       // console.log(Stripe);
       // console.log(coins);
 
-      let price = e.target.parentElement.parentElement.getAttribute("data-price");
+      let price =
+        e.target.parentElement.parentElement.getAttribute("data-price");
       console.log(price);
       this.showLoader = true;
       Stripe(STRIPE.public)
         .redirectToCheckout({
           lineItems: [{ price, quantity: 1 }],
           mode: "payment",
-<<<<<<< HEAD
-          successUrl: "https://76189a1a-620c-4656-bb71-2abccdfe5205.netlify.app/",
-=======
           successUrl:
             "https://b9d78345-1579-4c19-8b5f-825db8dc6a8d.netlify.app",
->>>>>>> Seb
         })
         .then((res) => {
           alert(res);
