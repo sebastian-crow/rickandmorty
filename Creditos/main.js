@@ -1,4 +1,9 @@
-import STRIPE from "./assets/stripe-keys.js";
+const STRIPE = {
+  public:
+    "pk_test_51LGllkFVtJKu5C8LTrVJy9cQISBGqM0d6Gr13RBDjTAoUe8D46cPheuM80mV3O0ICGSPQCWRwEyNbgcAPFffoSpf00jH9Ckksm",
+  secret:
+    "sk_test_51LGllkFVtJKu5C8LrBXgcFkboxS60SeefnzHtI35H9AUufghujWkLzziPcwNgVl9HsqXj2KRgF1W7Zi8UvRzKT9I00FVDICJHB",
+};
 
 var app = new Vue({
   el: "#app",
@@ -9,9 +14,41 @@ var app = new Vue({
     showLoader: false,
     isUserActive: {},
     paymentCard: ["Visa", "4242424242424242"],
+    codes: [
+      "326ac831-0538-4022-8ff0-632c89f420c7",
+      "76189a1a-620c-4656-bb71-2abccdfe5205",
+      "eac53ffd-f49f-4d21-903d-bca3907d2073",
+      "08ce4d54-5793-4476-8ee4-49acc939cf43",
+      "367464ed-1a66-4a95-a4d5-b10781b08501",
+    ],
+    isValidCheckout: false,
+    arrayFilterEvents: [],
+    cod: null,
   },
 
   methods: {
+    logOut() {
+      Swal.fire({
+        title: "Desea Cerrar La Sesión?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Cerrar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Cerrando Sesión", "", "success");
+          this.isUserActive = {};
+          localStorage.removeItem(
+            "userActive",
+            JSON.stringify(this.isUserActive)
+          );
+          location.href = '../index.html'
+        }
+      });
+    },
+
     getProducts() {
       let fetchOptions = {
         headers: {
@@ -82,7 +119,7 @@ var app = new Vue({
       let coins = e.target.getAttribute("data-amount").slice(0, -10).trim();
       localStorage.setItem("coins", coins);
 
-      console.log(Stripe);
+      // console.log(Stripe);
       // console.log(coins);
 
       let price =
@@ -94,8 +131,7 @@ var app = new Vue({
           lineItems: [{ price, quantity: 1 }],
           mode: "payment",
           successUrl:
-            "http://127.0.0.1:5500/Creditos/assets/stripe-succes.html",
-          cancelUrl: "http://127.0.0.1:5500/Creditos/assets/stripe-cancel.html",
+            "https://b9d78345-1579-4c19-8b5f-825db8dc6a8d.netlify.app",
         })
         .then((res) => {
           alert(res);
@@ -103,6 +139,75 @@ var app = new Vue({
           console.log(res.json());
         });
       this.showLoader = true;
+    },
+
+    addCoinsArrayUsers() {
+      this.isUserActive.RickyCoins += parseInt(localStorage.getItem("coins"));
+      console.log(this.isUserActive);
+      localStorage.setItem("userActive", JSON.stringify(this.isUserActive));
+      let userUpdate = this.users.find(
+        (el) =>
+          el.username.toLowerCase() === this.isUserActive.username.toLowerCase()
+      );
+      console.log(userUpdate);
+
+      userUpdate = { ...userUpdate, RickyCoins: this.isUserActive.RickyCoins };
+      // console.log(this.users);
+      this.users = this.users.map((el, i) =>
+        el.username === userUpdate.username ? (el = userUpdate) : el
+      );
+      localStorage.setItem("users", JSON.stringify(this.users));
+      console.log(this.users);
+    },
+
+    async events() {
+      let key =
+        "sk_test_51LGllkFVtJKu5C8LrBXgcFkboxS60SeefnzHtI35H9AUufghujWkLzziPcwNgVl9HsqXj2KRgF1W7Zi8UvRzKT9I00FVDICJHB";
+      let fetchOptions = {
+        headers: {
+          Authorization: `Bearer ${key}`,
+        },
+      };
+      this.showLoader = true;
+      let res = await fetch("https://api.stripe.com/v1/events", fetchOptions);
+      let data = await res.json();
+      console.log();
+
+      if (data.data[0].type === "payment_intent.created") return;
+
+      if (data.data[0].type === "checkout.session.completed") {
+        let arrayFilter = data.data.filter(
+          (el) => el.type === "checkout.session.completed"
+        );
+        // console.log(arrayFilter[0].data.object);
+        this.arrayFilterEvents = arrayFilter[0].data.object;
+        if (this.arrayFilterEvents) {
+          this.isValidCheckout = true;
+          console.log(this.arrayFilterEvents);
+        }
+      }
+
+      this.showLoader = false;
+    },
+
+    runCode() {
+      let { payment_status } = this.arrayFilterEvents;
+      if (payment_status === "paid") {
+        if (this.codes.some((code) => code === this.cod)) {
+          console.log(this.cod);
+          this.addCoinsArrayUsers();
+
+          localStorage.removeItem("coins");
+          this.isValidCheckout = false;
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Codigo Invalido...",
+            text: `Codigo ${this.cod} no es valido`,
+          });
+          return false;
+        }
+      }
     },
   },
 
@@ -116,6 +221,14 @@ var app = new Vue({
     if (isActive !== null) {
       this.getProducts();
       this.isUserActive = isActive;
+
+      //new code
+
+      let coins = localStorage.getItem("coins");
+      // isActive.RickyCoins = coins;
+      if (coins !== null) {
+        this.events();
+      }
     } else {
       location.href = "../Login/index.html";
     }

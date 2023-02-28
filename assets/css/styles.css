@@ -198,6 +198,7 @@ input[type="email"]:focus,
 input[type="number"]:focus {
   scale: 1.04;
   border: 2px solid #000 !important;
+  color: black;
   box-shadow: 2px 2px 0px var(--color-3);
 }
 

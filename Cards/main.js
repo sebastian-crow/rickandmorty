@@ -61,6 +61,8 @@ createApp({
       this.isOpen = false;
     },
     buyCard(cardPrice, card) {
+      const rickycoins = this.User.RickyCoins;
+      this.input.userPrice = rickycoins;
       if (this.input.userPrice) {
         this.input.systemPrice = cardPrice;
         this.input.success =
@@ -148,6 +150,28 @@ createApp({
     removeDuplicates(arr) {
       return arr.filter((item, index) => arr.indexOf(item) === index);
     },
+
+    logOut() {
+      Swal.fire({
+        title: "Desea Cerrar La Sesión?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Cerrar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Cerrando Sesión", "", "success");
+          this.isUserActive = {};
+          localStorage.removeItem(
+            "userActive",
+            JSON.stringify(this.isUserActive)
+          );
+          location.href = "../index.html";
+        }
+      });
+    },
   },
 
   async beforeCreate() {
@@ -168,8 +192,9 @@ createApp({
     this.localFavorites = JSON.parse(localStorage.getItem("favorites"));
   },
   mounted() {
-    this.User = JSON.parse(localStorage.getItem("user"));
+    this.User = JSON.parse(localStorage.getItem("userActive"));
     this.isAuthenticated = this.User ? true : false;
+    if (!this.User) location.href = "../index.html";
   },
   beforeUpdate() {},
   updated() {},

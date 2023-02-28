@@ -20,15 +20,9 @@
         class="grid grid-cols-3 md:grid md:grid-cols-6 md:gap-y-4 m-4 w-[88%] sm:m-10 lg:ml-20 h-20"
       >
         <h1
-          class="col-span-6 place-self-start text-2xl font-semibold w-full h-full"
-        >
-          Bienvenido afortunado comprador User
-        </h1>
-
-        <h1
           class="col-span-3 place-self-start text-2xl font-semibold w-full h-full"
         >
-          Tú cantidad de RickyCoins = $ 0 RC
+          Bienvenido afortunado comprador {{User.username}}
         </h1>
         <a
           href="../Creditos/index.html"
@@ -36,6 +30,17 @@
         >
           RickyCoins</a
         >
+        <h1
+          class="col-span-3 place-self-start text-2xl font-semibold w-full h-full"
+        >
+          Tú cantidad de RickyCoins = $ {{ User.RickyCoins }} RC
+        </h1>
+        <button
+          @click="logOut"
+          class="btn btn-danger md:col-span-3 md:place-self-end border-2 w-20 border-dashed border-black md:w-28 h-8 rounded-md border-2 border-white"
+        >
+          Cerrar Sesión
+        </button>
       </div>
       <div
         class="container-md col-md-12 mb-10 mb-10 d-flex justify-content-center align-items-center flex-column mb-4 mb-xl-0 fl"
@@ -194,7 +199,7 @@
                         <code
                           class="animation rounded-md text-md w-20 font-bold"
                         >
-                          <strong>Escribe tu propuesta </strong>
+                          <strong>Fondos insuficientes </strong>
                         </code>
                       </h1>
 
@@ -252,12 +257,6 @@
                           disabled
                           v-show="input.randomPrice"
                         />
-                        <input
-                          type="text"
-                          class="col-span-6 w-full h-10 mt-6 border-2 rounded-md border-dashed border-black"
-                          placeholder="Propuesta de $RC"
-                          v-model="input.userPrice"
-                        />
                       </div>
                     </div>
                   </div>
@@ -268,6 +267,8 @@
         </section>
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="main.js"></script>
   </body>
 </html>

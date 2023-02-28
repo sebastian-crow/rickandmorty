@@ -21,6 +21,13 @@ var app = new Vue({
 
     showLoader: false,
     isUserActive: {},
+    codes: [
+      "326ac831-0538-4022-8ff0-632c89f420c7",
+      "76189a1a-620c-4656-bb71-2abccdfe5205",
+      "eac53ffd-f49f-4d21-903d-bca3907d2073",
+      "08ce4d54-5793-4476-8ee4-49acc939cf43",
+      "367464ed-1a66-4a95-a4d5-b10781b08501",
+    ],
   },
 
   methods: {
@@ -155,12 +162,15 @@ var app = new Vue({
     // funcion verificar user login
     verifyLogin(username, password, arrayUsers) {
       if (
-        arrayUsers.find(
+        arrayUsers.some(
           (el) =>
             el.username.toLowerCase() === username.toLowerCase() &&
             el.password === password
         )
       ) {
+        this.isUserActive = arrayUsers.find(
+          (el) => el.username.toLowerCase() === username.toLowerCase()
+        );
         return true;
       }
       Swal.fire({
@@ -174,6 +184,7 @@ var app = new Vue({
       const { username, password } = this.formLogin;
       if (this.verifyLogin(username, password, this.users)) {
         //Consulta api y redireccion al la ruta
+        console.log(this.isUserActive);
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
@@ -192,13 +203,11 @@ var app = new Vue({
         });
         this.showLoader = true;
         setTimeout(() => {
-          location.href = "../Cards/index.html";
+          location.href = "Cards/index.html";
         }, 1000);
         this.isUserActive = {
-          username,
-          password,
+          ...this.isUserActive,
           isActive: true,
-          RickyCoins: 0,
         };
         localStorage.setItem("userActive", JSON.stringify(this.isUserActive));
         this.showLoader = false;
@@ -229,7 +238,7 @@ var app = new Vue({
         this.validUserExists(this.users, username)
           ? false
           : this.addUsers(
-              { username, password, fullName, email, cellPhone },
+              { username, password, fullName, email, cellPhone, RickyCoins: 0 },
               this.users
             );
       }
