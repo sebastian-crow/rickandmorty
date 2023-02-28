@@ -35,7 +35,7 @@ $ open index.html
 
 ```bash
  # Github Pages
- $ On it
+ $ https://sebastian-crow.github.io/rickandmorty
 ```
 
 ## License
