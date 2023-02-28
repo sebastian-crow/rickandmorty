@@ -31,7 +31,7 @@
         </h2>
       </section>
 
-      <div class="container-xl grid-fluid">
+      <div v-if="!isValidCheckout" class="container-xl grid-fluid">
 
         <template v-for="({dataPrice,name,images,description,price}, i) in productsApi" :key="i">
           <div class="card-first" :data-price="dataPrice">
@@ -47,7 +47,8 @@
         </template>
 
 
-        <div class="content-payment" for="btnControl">
+
+        <div class=" content-payment" for="btnControl">
           <input type="checkbox" id="btnControl" />
           <label for="btnControl">
             <div class="credit-card">
@@ -60,6 +61,28 @@
             </div>
           </label>
         </div>
+      </div>
+
+      <button @click="logOut" class="btn btn-danger out"> Cerrar Sesión</button>
+
+      <div v-if="!isValidCheckout" class="container-md text-center my-5 fs-6">
+        <table class="table table-hover table-dark">
+          <h2>Tus Datos De Usuario :</h2>
+          <thead>
+            <tr>
+              <th scope="col">Nombre De Usuario</th>
+              <th scope="col">Nombre Completo</th>
+              <th scope="col">Email</th>
+              <th scope="col">Celular</th>
+              <th scope="col">RickyCoins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td v-for="value, key in isUserActive" v-if="key !== 'password' && key!=='isActive'">{{value}} </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
 
@@ -97,6 +120,20 @@
       </template>
 
     </div>
+
+    <template v-if="isValidCheckout">
+      <div class="container-xl grid-fluid my-3 text-center">
+        <form @submit.prevent="runCode">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+              <label for="coins">Digita Tu Código De Compra</label>
+              <input v-model.trim="cod" type="text" class="form-control" id="coins">
+            </div>
+          </div>
+          <button class="btn btn-primary btn-first my-3" type="submit">Validar Código</button>
+        </form>
+      </div>
+    </template>
 
 
 

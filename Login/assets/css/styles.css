@@ -254,3 +254,17 @@ ul {
   margin: 0.25rem;
   list-style: none !important;
 }
+
+.table {
+  max-width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.out {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 100;
+  margin: 0.5rem;
+}
