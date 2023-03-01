@@ -32,7 +32,7 @@
         </h2>
       </section>
 
-      <div class="container-xl grid-fluid">
+      <div v-if="!isValidCheckout" class="container-xl grid-fluid">
 
         <template v-for="({dataPrice,name,images,description,price}, i) in productsApi" :key="i">
           <div class="card-first" :data-price="dataPrice">

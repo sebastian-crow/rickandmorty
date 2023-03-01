@@ -1,8 +1,6 @@
 const STRIPE = {
-  public:
-    "pk_test_51LGllkFVtJKu5C8LTrVJy9cQISBGqM0d6Gr13RBDjTAoUe8D46cPheuM80mV3O0ICGSPQCWRwEyNbgcAPFffoSpf00jH9Ckksm",
-  secret:
-    "sk_test_51LGllkFVtJKu5C8LrBXgcFkboxS60SeefnzHtI35H9AUufghujWkLzziPcwNgVl9HsqXj2KRgF1W7Zi8UvRzKT9I00FVDICJHB",
+  public: "pk_test_51LGllkFVtJKu5C8LTrVJy9cQISBGqM0d6Gr13RBDjTAoUe8D46cPheuM80mV3O0ICGSPQCWRwEyNbgcAPFffoSpf00jH9Ckksm",
+  secret: "sk_test_51LGllkFVtJKu5C8LrBXgcFkboxS60SeefnzHtI35H9AUufghujWkLzziPcwNgVl9HsqXj2KRgF1W7Zi8UvRzKT9I00FVDICJHB",
 };
 
 var app = new Vue({
@@ -40,10 +38,7 @@ var app = new Vue({
         if (result.isConfirmed) {
           Swal.fire("Cerrando Sesión", "", "success");
           this.isUserActive = {};
-          localStorage.removeItem(
-            "userActive",
-            JSON.stringify(this.isUserActive)
-          );
+          localStorage.removeItem("userActive", JSON.stringify(this.isUserActive));
           location.href = "../index.html";
         }
       });
@@ -79,9 +74,7 @@ var app = new Vue({
             // console.log(products);
 
             prices.forEach((el) => {
-              let productData = products.filter(
-                (product) => product.id === el.product
-              );
+              let productData = products.filter((product) => product.id === el.product);
               // console.log(productData);
               IdProducs.push(el.id);
               this.productsApiID = [...IdProducs.slice(0, 4)];
@@ -90,9 +83,7 @@ var app = new Vue({
               let newArray = this.productsApiID.map((el) => el);
               let newPrices = prices.map((el) => el.unit_amount_decimal);
               newPrices = [...newPrices.slice(0, 4)];
-              newPrices = newPrices.map((el) =>
-                formatter.format(`${el.slice(0, -2)}`)
-              );
+              newPrices = newPrices.map((el) => formatter.format(`${el.slice(0, -2)}`));
               // console.log(newPrices);
               this.productsApi = this.productsApi.map((product, index) => {
                 return {
@@ -108,9 +99,7 @@ var app = new Vue({
           })
           .catch((err) => {
             console.log(err);
-            let message =
-              err.statusText ||
-              "Ocurrio un error al conectar con la API de Stripe";
+            let message = err.statusText || "Ocurrio un error al conectar con la API de Stripe";
           })
       );
     },
@@ -122,16 +111,14 @@ var app = new Vue({
       // console.log(Stripe);
       // console.log(coins);
 
-      let price =
-        e.target.parentElement.parentElement.getAttribute("data-price");
+      let price = e.target.parentElement.parentElement.getAttribute("data-price");
       console.log(price);
       this.showLoader = true;
       Stripe(STRIPE.public)
         .redirectToCheckout({
           lineItems: [{ price, quantity: 1 }],
           mode: "payment",
-          successUrl:
-            "https://b9d78345-1579-4c19-8b5f-825db8dc6a8d.netlify.app",
+          successUrl: "https://b9d78345-1579-4c19-8b5f-825db8dc6a8d.netlify.app",
         })
         .then((res) => {
           alert(res);
@@ -145,24 +132,18 @@ var app = new Vue({
       this.isUserActive.RickyCoins += parseInt(localStorage.getItem("coins"));
       console.log(this.isUserActive);
       localStorage.setItem("userActive", JSON.stringify(this.isUserActive));
-      let userUpdate = this.users.find(
-        (el) =>
-          el.username.toLowerCase() === this.isUserActive.username.toLowerCase()
-      );
+      let userUpdate = this.users.find((el) => el.username.toLowerCase() === this.isUserActive.username.toLowerCase());
       console.log(userUpdate);
 
       userUpdate = { ...userUpdate, RickyCoins: this.isUserActive.RickyCoins };
       // console.log(this.users);
-      this.users = this.users.map((el, i) =>
-        el.username === userUpdate.username ? (el = userUpdate) : el
-      );
+      this.users = this.users.map((el, i) => (el.username === userUpdate.username ? (el = userUpdate) : el));
       localStorage.setItem("users", JSON.stringify(this.users));
       console.log(this.users);
     },
 
     async events() {
-      let key =
-        "sk_test_51LGllkFVtJKu5C8LrBXgcFkboxS60SeefnzHtI35H9AUufghujWkLzziPcwNgVl9HsqXj2KRgF1W7Zi8UvRzKT9I00FVDICJHB";
+      let key = "sk_test_51LGllkFVtJKu5C8LrBXgcFkboxS60SeefnzHtI35H9AUufghujWkLzziPcwNgVl9HsqXj2KRgF1W7Zi8UvRzKT9I00FVDICJHB";
       let fetchOptions = {
         headers: {
           Authorization: `Bearer ${key}`,
@@ -176,9 +157,7 @@ var app = new Vue({
       if (data.data[0].type === "payment_intent.created") return;
 
       if (data.data[0].type === "checkout.session.completed") {
-        let arrayFilter = data.data.filter(
-          (el) => el.type === "checkout.session.completed"
-        );
+        let arrayFilter = data.data.filter((el) => el.type === "checkout.session.completed");
         // console.log(arrayFilter[0].data.object);
         this.arrayFilterEvents = arrayFilter[0].data.object;
         if (this.arrayFilterEvents) {
